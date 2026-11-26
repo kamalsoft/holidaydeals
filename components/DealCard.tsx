@@ -57,7 +57,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
       transition={{ duration: 0.25, delay: reduce ? 0 : Math.min(index, 12) * 0.03 }}
       whileHover={reduce ? undefined : { y: -3 }}
       className={`group flex flex-col rounded-2xl border bg-white p-4 shadow-sm transition-shadow hover:shadow-lg dark:bg-slate-900 ${
-        d.expired ? "border-slate-200 opacity-70 dark:border-slate-800" : "border-slate-200 dark:border-slate-800"
+        d.expired ? "border-dashed border-slate-300 dark:border-slate-700" : "border-slate-200 dark:border-slate-800"
       }`}
     >
       <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs">

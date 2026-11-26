@@ -32,7 +32,7 @@ export default function DealTable({ deals, starredIds, onToggleStar, onCompare, 
         </thead>
         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
           {deals.map((d) => (
-            <tr key={d.id} className={`align-top ${d.expired ? "opacity-60" : ""}`}>
+            <tr key={d.id} className={`align-top ${d.expired ? "bg-slate-50 dark:bg-slate-900/60" : ""}`}>
               <td className="max-w-md px-3 py-2">
                 <div className="line-clamp-2 font-medium text-slate-900 dark:text-slate-100">{d.title}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">{[d.brand, d.subCategory || d.category].filter(Boolean).join(" · ")}</div>

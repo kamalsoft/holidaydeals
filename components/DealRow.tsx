@@ -25,7 +25,7 @@ export default function DealRow({ deal: d, starred, onToggleStar, onCompare, onH
   const btn = "rounded-xl px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800";
 
   return (
-    <li className={`flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 ${d.expired ? "opacity-60" : ""}`}>
+    <li className={`flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 ${d.expired ? "bg-slate-50 dark:bg-slate-900/60" : ""}`}>
       <div className="min-w-0 flex-1 basis-64">
         <div className="mb-0.5 flex flex-wrap items-center gap-1.5 text-xs">
           <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-200">{d.store || "Unknown store"}</span>
