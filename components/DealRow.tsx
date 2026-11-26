@@ -69,7 +69,7 @@ export default function DealRow({ deal: d, starred, onToggleStar, onCompare, onH
             View ↗
           </a>
         ) : (
-          <span className="ml-1 text-xs text-slate-400">No link</span>
+          <span className="ml-1 text-xs text-slate-600 dark:text-slate-400">No link</span>
         )}
       </div>
     </li>

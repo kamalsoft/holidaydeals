@@ -23,10 +23,10 @@ function CheckList({
               <input type="checkbox" className="accent-indigo-600" checked={selected.includes(v)} onChange={() => onToggle(v)} />
               <span className="truncate text-slate-700 dark:text-slate-200">{v}</span>
             </span>
-            <span className="text-xs text-slate-400">{n}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400">{n}</span>
           </label>
         ))}
-        {values.length === 0 && <p className="text-xs text-slate-400">None in this view</p>}
+        {values.length === 0 && <p className="text-xs text-slate-600 dark:text-slate-400">None in this view</p>}
       </div>
     </fieldset>
   );
@@ -79,7 +79,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
                 onChange={() => onChange({ bands: f.bands.includes(b.id) ? f.bands.filter((x) => x !== b.id) : [...f.bands, b.id] })} />
               <span className="text-slate-700 dark:text-slate-200">{b.label}</span>
             </span>
-            <span className="text-xs text-slate-400">{facets.bandCounts[b.id] ?? 0}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400">{facets.bandCounts[b.id] ?? 0}</span>
           </label>
         ))}
         <label className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
@@ -87,7 +87,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
             <input type="checkbox" className="accent-indigo-600" checked={f.endingOnly} onChange={() => onChange({ endingOnly: !f.endingOnly })} />
             <span className="text-slate-700 dark:text-slate-200">Ending within 7 days</span>
           </span>
-          <span className="text-xs text-slate-400">{facets.endingCount}</span>
+          <span className="text-xs text-slate-600 dark:text-slate-400">{facets.endingCount}</span>
         </label>
       </fieldset>
 

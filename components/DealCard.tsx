@@ -130,7 +130,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
         <button
           type="button"
           onClick={() => onHide(d)}
-          className="whitespace-nowrap rounded-xl px-2 py-1.5 text-xs text-slate-500 transition hover:bg-rose-50 hover:text-rose-700 dark:hover:bg-rose-500/10 dark:hover:text-rose-300"
+          className="whitespace-nowrap rounded-xl px-2 py-1.5 text-xs text-slate-500 transition dark:text-slate-400 hover:bg-rose-50 hover:text-rose-700 dark:hover:bg-rose-500/10 dark:hover:text-rose-300"
         >
           Hide
         </button>
@@ -154,7 +154,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
             </a>
           </>
         ) : (
-          <span className="ml-auto text-xs text-slate-400">No link</span>
+          <span className="ml-auto text-xs text-slate-600 dark:text-slate-400">No link</span>
         )}
       </div>
     </motion.article>
