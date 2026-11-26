@@ -15,7 +15,7 @@ function CheckList({
 }: { title: string; values: [string, number][]; selected: string[]; onToggle: (v: string) => void }) {
   return (
     <fieldset className="space-y-1.5">
-      <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{title}</legend>
+      <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">{title}</legend>
       <div className="max-h-44 space-y-1 overflow-auto pr-1">
         {values.map(([v, n]) => (
           <label key={v} className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
@@ -48,7 +48,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
       </div>
 
       <div>
-        <div className="mb-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <div className="mb-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
           <span>Price</span>
           <span className="normal-case">${f.minPrice} – ${maxShown}</span>
         </div>
@@ -63,7 +63,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
       </div>
 
       <div>
-        <label htmlFor="min-off" className="mb-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <label htmlFor="min-off" className="mb-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
           <span>Minimum % off</span><span className="normal-case">{f.minOff}%+</span>
         </label>
         <input id="min-off" type="range" min={0} max={90} step={5} value={f.minOff}
@@ -71,7 +71,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
       </div>
 
       <fieldset className="space-y-1.5">
-        <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Discount depth</legend>
+        <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">Discount depth</legend>
         {DISCOUNT_BANDS.map((b) => (
           <label key={b.id} className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
             <span className="flex items-center gap-2">

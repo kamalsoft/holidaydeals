@@ -52,7 +52,7 @@ export default function DashboardView(p: ViewProps) {
 
       <section aria-label="Discount spread" className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-sm font-bold text-slate-900 dark:text-white">How deep are the discounts?</h2>
-        <p className="mb-4 text-xs text-slate-500 dark:text-slate-400">Active deals with a % off, grouped by depth.</p>
+        <p className="mb-4 text-xs text-slate-600 dark:text-slate-400">Active deals with a % off, grouped by depth.</p>
         <ul className="space-y-3">
           {buckets.map((b) => (
             <li key={b.label} className="grid grid-cols-[7rem_1fr_3.5rem] items-center gap-3 text-sm">

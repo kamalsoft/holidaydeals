@@ -38,7 +38,7 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
             className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
             <header className="flex items-center justify-between border-b border-slate-200 p-4 dark:border-slate-800">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">🎁 My Wishlist</h2>
-              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
 
             <div className="grid grid-cols-3 gap-4 p-4">
@@ -48,12 +48,12 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
             </div>
 
             <ul className="flex-1 divide-y divide-slate-100 overflow-auto px-4 dark:divide-slate-800">
-              {items.length === 0 && <li className="py-8 text-center text-sm text-slate-500">Your wishlist is empty. Star deals to add them here.</li>}
+              {items.length === 0 && <li className="py-8 text-center text-sm text-slate-600">Your wishlist is empty. Star deals to add them here.</li>}
               {items.map((i) => (
                 <li key={i.id} className="flex items-center justify-between gap-3 py-3">
                   <div className="min-w-0">
                     <p className="line-clamp-1 text-sm font-medium text-slate-900 dark:text-slate-100">{i.title}</p>
-                    <p className="text-xs text-slate-500">{i.store} · save ~${savingsOf(i).toFixed(2)}</p>
+                    <p className="text-xs text-slate-600">{i.store} · save ~${savingsOf(i).toFixed(2)}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="font-bold text-slate-900 dark:text-white">{i.price === null ? "—" : `$${i.price.toFixed(2)}`}</span>
@@ -85,7 +85,7 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">{label}</div>
       <div className={`text-lg font-bold ${accent ? "text-emerald-700 dark:text-emerald-300" : "text-slate-900 dark:text-white"}`}>{value}</div>
     </div>
   );

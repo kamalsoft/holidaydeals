@@ -33,9 +33,9 @@ export default function CompareDrawer({ target, similar, onClose }: Props) {
               <div>
                 <h2 className="text-lg font-bold text-indigo-700 dark:text-indigo-300">Compare prices</h2>
                 <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{target.title}</p>
-                <p className="text-xs text-slate-500">{target.store} · ${target.price?.toFixed(2) ?? "—"}</p>
+                <p className="text-xs text-slate-600">{target.store} · ${target.price?.toFixed(2) ?? "—"}</p>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
 
             <div className="flex-1 space-y-2 overflow-auto p-4">
@@ -45,13 +45,13 @@ export default function CompareDrawer({ target, similar, onClose }: Props) {
                 </div>
               )}
               {similar.length === 0 && (
-                <p className="text-sm text-slate-500">No similar deals from other stores in this sheet.</p>
+                <p className="text-sm text-slate-600">No similar deals from other stores in this sheet.</p>
               )}
               {similar.map(({ item, similarity }) => (
                 <div key={item.id} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
                   <div className="min-w-0">
                     <p className="line-clamp-2 text-sm font-medium text-slate-900 dark:text-slate-100">{item.title}</p>
-                    <p className="text-xs text-slate-500">{item.store} · {Math.round(similarity * 100)}% match</p>
+                    <p className="text-xs text-slate-600">{item.store} · {Math.round(similarity * 100)}% match</p>
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="font-bold text-slate-900 dark:text-white">{item.price === null ? "—" : `$${item.price.toFixed(2)}`}</div>

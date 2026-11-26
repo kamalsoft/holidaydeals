@@ -58,7 +58,7 @@ export default function Preferences() {
         <>
           <button type="button" aria-label="Close display settings" onClick={() => setOpen(false)} className="fixed inset-0 z-40 cursor-default" />
           <div role="dialog" aria-label="Display settings" className="absolute right-0 z-50 mt-2 w-60 space-y-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl dark:border-slate-800 dark:bg-slate-900">
-            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
               Theme
               <select value={theme} onChange={(e) => setTheme(e.target.value as Theme)} className={`mt-1 normal-case ${selectClass}`}>
                 <option value="system">Match device</option>
@@ -66,7 +66,7 @@ export default function Preferences() {
                 <option value="dark">Dark</option>
               </select>
             </label>
-            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
               Colour palette
               <select value={accessible ? "accessible" : "standard"} onChange={(e) => setAccessible(e.target.value === "accessible")} className={`mt-1 normal-case ${selectClass}`}>
                 <option value="standard">Standard</option>

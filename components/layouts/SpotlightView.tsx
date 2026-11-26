@@ -13,7 +13,7 @@ function MiniTile({ label, deal, onOpen }: { label: string; deal: DealItem | nul
   return (
     <button type="button" disabled={!deal} onClick={() => deal && onOpen(deal)}
       className="flex flex-col rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:-translate-y-0.5 hover:shadow-md disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900">
-      <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">{label}</span>
       <span className="mt-1 line-clamp-2 text-xs font-semibold text-slate-900 dark:text-slate-100">{deal?.title ?? "No match"}</span>
       {deal && (
         <span className="mt-auto pt-2 text-sm font-bold text-slate-900 dark:text-white">

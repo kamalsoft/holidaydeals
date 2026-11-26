@@ -88,15 +88,15 @@ export default function FeedView(p: ViewProps) {
                 <span className="w-5 shrink-0 text-xs font-bold text-rose-700 dark:text-rose-300">{i + 1}</span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-2 block text-xs font-semibold text-slate-900 dark:text-slate-100">{d.title}</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">{d.store}{d.price !== null ? ` · $${d.price.toFixed(2)}` : ""}</span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400">{d.store}{d.price !== null ? ` · $${d.price.toFixed(2)}` : ""}</span>
                 </span>
                 <span className="shrink-0 text-xs font-bold text-emerald-700 dark:text-emerald-300">{d.offPercent}%</span>
               </button>
             </li>
           ))}
         </ol>
-        {p.hasData && p.highlights.hotDeals.length === 0 && <p className="text-xs text-slate-500">No discounted deals in this view.</p>}
-        <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">From the sheet · as of {p.asOf}</p>
+        {p.hasData && p.highlights.hotDeals.length === 0 && <p className="text-xs text-slate-600">No discounted deals in this view.</p>}
+        <p className="mt-3 text-xs text-slate-600 dark:text-slate-400">From the sheet · as of {p.asOf}</p>
       </aside>
     </div>
   );

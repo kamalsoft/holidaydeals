@@ -43,10 +43,10 @@ function Card({
             {deal.price !== null && <span className="text-base font-bold text-slate-900 dark:text-white">${deal.price.toFixed(2)}</span>}
             {deal.offPercent !== null && <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">{deal.offPercent}% off</span>}
           </div>
-          {hint && <p className="truncate text-xs text-slate-500 dark:text-slate-400">{hint}</p>}
+          {hint && <p className="truncate text-xs text-slate-600 dark:text-slate-400">{hint}</p>}
         </>
       ) : (
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">No match in this view.</p>
+        <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">No match in this view.</p>
       )}
     </motion.button>
   );
@@ -85,7 +85,7 @@ function HotDealsCard({ items, onShowAll }: { items: DealItem[]; onShowAll: () =
           </div>
         </>
       ) : (
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">No discounted deals in this view.</p>
+        <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">No discounted deals in this view.</p>
       )}
     </div>
   );
@@ -116,9 +116,9 @@ function HotDealsModal({
             <header className="flex items-start justify-between gap-3 border-b border-slate-200 p-4 dark:border-slate-800">
               <div>
                 <h2 id="hot-deals-title" className="text-lg font-bold text-slate-900 dark:text-white">🔥 Hot deals</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Biggest discounts from the sheet · as of {asOf}</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Biggest discounts from the sheet · as of {asOf}</p>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close hot deals" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close hot deals" className="rounded-xl px-2 py-1 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
             <ol className="flex-1 divide-y divide-slate-100 overflow-auto dark:divide-slate-800">
               {items.map((d, i) => (
@@ -131,7 +131,7 @@ function HotDealsModal({
                     <span className="w-6 text-xs font-bold text-rose-700 dark:text-rose-300">{i + 1}</span>
                     <span className="min-w-0 flex-1">
                       <span className="line-clamp-1 block text-sm text-slate-900 dark:text-slate-100">{d.title}</span>
-                      <span className="block text-xs text-slate-500 dark:text-slate-400">{d.store}</span>
+                      <span className="block text-xs text-slate-600 dark:text-slate-400">{d.store}</span>
                     </span>
                     <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">{d.offPercent}%</span>
                     <span className="w-20 text-right text-sm text-slate-700 dark:text-slate-200">{d.price === null ? "—" : `$${d.price.toFixed(2)}`}</span>

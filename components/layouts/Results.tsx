@@ -23,7 +23,7 @@ export default function Results({ p, renderCards, skeleton, scroll }: Props) {
   if (!p.hasData) return null;
   if (p.results.length === 0) {
     return (
-      <div role="status" className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 p-10 text-center text-sm text-slate-500 dark:border-slate-700">
+      <div role="status" className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 p-10 text-center text-sm text-slate-600 dark:border-slate-700">
         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
           <circle cx="11" cy="11" r="7" />
           <path d="m20 20-3.5-3.5" />
@@ -46,7 +46,7 @@ export default function Results({ p, renderCards, skeleton, scroll }: Props) {
     );
     if (p.priceGroups.length === 0) {
       return (
-        <div className="rounded-2xl border border-dashed border-slate-300 p-10 text-center text-sm text-slate-500 dark:border-slate-700">
+        <div className="rounded-2xl border border-dashed border-slate-300 p-10 text-center text-sm text-slate-600 dark:border-slate-700">
           No product appears at two or more stores in this view. Try clearing a filter.
         </div>
       );

@@ -61,7 +61,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
       }`}
     >
       <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs">
-        <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-200">
+        <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-900 dark:bg-indigo-500/20 dark:text-indigo-200">
           {d.store || "Unknown store"}
         </span>
         {d.tabs.map((t) => (
@@ -76,7 +76,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
       <h3 className="line-clamp-3 min-h-[3.6rem] text-sm font-semibold leading-snug text-slate-900 dark:text-slate-100">
         {d.title}
       </h3>
-      <p className="mt-1 truncate text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-1 truncate text-xs text-slate-600 dark:text-slate-400">
         {[d.brand, d.subCategory || d.category, d.size].filter(Boolean).join(" · ")}
       </p>
 
@@ -84,10 +84,10 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
         <div>
           <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">{money(d.price)}</div>
           {d.wasPrice !== null && (
-            <div className="text-xs text-slate-500 line-through">was {money(d.wasPrice)}</div>
+            <div className="text-xs text-slate-600 line-through">was {money(d.wasPrice)}</div>
           )}
           {d.offPercent !== null && (
-            <span className="mt-1 inline-block rounded-xl bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200">
+            <span className="mt-1 inline-block rounded-xl bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-200">
               {d.offPercent}% OFF{d.offSource === "computed" ? " (calc.)" : ""}
             </span>
           )}
@@ -95,17 +95,17 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
         {d.score !== null && (
           <div className="flex flex-col items-center">
             <ScoreRing value={d.score} />
-            <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Score</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">Score</span>
           </div>
         )}
       </div>
 
       {d.notes && (
-        <p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
+        <p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-600 dark:border-slate-800 dark:text-slate-400">
           {d.notes}
         </p>
       )}
-      {d.otherOffer && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Other offer: {d.otherOffer}</p>}
+      {d.otherOffer && <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">Other offer: {d.otherOffer}</p>}
 
       <div className="mt-3 flex flex-wrap items-center gap-1">
         <button
@@ -130,7 +130,7 @@ export default function DealCard({ deal: d, index, starred, onToggleStar, onComp
         <button
           type="button"
           onClick={() => onHide(d)}
-          className="whitespace-nowrap rounded-xl px-2 py-1.5 text-xs text-slate-500 transition dark:text-slate-400 hover:bg-rose-50 hover:text-rose-700 dark:hover:bg-rose-500/10 dark:hover:text-rose-300"
+          className="whitespace-nowrap rounded-xl px-2 py-1.5 text-xs text-slate-600 transition dark:text-slate-400 hover:bg-rose-50 hover:text-rose-700 dark:hover:bg-rose-500/10 dark:hover:text-rose-300"
         >
           Hide
         </button>

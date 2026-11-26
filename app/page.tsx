@@ -247,7 +247,7 @@ export default function Home() {
             Filters{isFiltered(filters) ? " •" : ""}
           </button>
           <div className="hidden items-center gap-3 lg:flex">
-            <label className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <label className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
               Layout
               <select
                 value={layout}
@@ -275,7 +275,7 @@ export default function Home() {
         </div>
       </header>
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)}>
-        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
           Layout
           <select
             value={layout}
@@ -286,7 +286,7 @@ export default function Home() {
           </select>
         </label>
         <div>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Display</p>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">Display</p>
           <Preferences />
         </div>
         <button

@@ -28,21 +28,21 @@ export default function DealRow({ deal: d, starred, onToggleStar, onCompare, onH
     <li className={`flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 ${d.expired ? "bg-slate-50 dark:bg-slate-900/60" : ""}`}>
       <div className="min-w-0 flex-1 basis-64">
         <div className="mb-0.5 flex flex-wrap items-center gap-1.5 text-xs">
-          <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-200">{d.store || "Unknown store"}</span>
+          <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-900 dark:bg-indigo-500/20 dark:text-indigo-200">{d.store || "Unknown store"}</span>
           {d.expired && <span className="rounded-full bg-slate-200 px-2 py-0.5 text-slate-700 dark:bg-slate-700 dark:text-slate-200">Expired</span>}
           {d.expiringSoon && <span className="rounded-full bg-amber-100 px-2 py-0.5 text-amber-800 dark:bg-amber-500/20 dark:text-amber-200">Ending soon</span>}
         </div>
         <p className="line-clamp-1 text-sm font-semibold text-slate-900 dark:text-slate-100">{d.title}</p>
-        <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+        <p className="truncate text-xs text-slate-600 dark:text-slate-400">
           {[d.brand, d.subCategory || d.category, d.size, d.notes].filter(Boolean).join(" · ")}
         </p>
       </div>
 
       <div className="flex items-baseline gap-2">
         <span className="text-lg font-bold text-slate-900 dark:text-white">{money(d.price)}</span>
-        {d.wasPrice !== null && <span className="text-xs text-slate-500 line-through">{money(d.wasPrice)}</span>}
+        {d.wasPrice !== null && <span className="text-xs text-slate-600 line-through">{money(d.wasPrice)}</span>}
         {d.offPercent !== null && (
-          <span className="rounded-xl bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200">
+          <span className="rounded-xl bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-200">
             {d.offPercent}% off
           </span>
         )}

@@ -20,7 +20,7 @@ export default function PriceMatchCard({ group: g, starred, onToggleStar, onComp
         ⇄ Price match · {g.offers.length} stores
       </div>
       <h3 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug text-slate-900 dark:text-slate-100">{g.title}</h3>
-      {g.brand && <p className="text-xs text-slate-500 dark:text-slate-400">{g.brand}</p>}
+      {g.brand && <p className="text-xs text-slate-600 dark:text-slate-400">{g.brand}</p>}
       {new Set(g.offers.map((o) => o.endsAt)).size > 1 && (
         <p className="mt-2 rounded-xl bg-amber-50 px-2 py-1 text-xs text-amber-900 dark:bg-amber-500/10 dark:text-amber-200">
           Deal dates differ between stores. Check each offer&apos;s dates.
@@ -34,10 +34,10 @@ export default function PriceMatchCard({ group: g, starred, onToggleStar, onComp
             <li key={o.id} className={`flex items-center gap-2 px-3 py-2 ${isLowest ? "bg-emerald-50 dark:bg-emerald-500/10" : ""}`}>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm text-slate-700 dark:text-slate-200">{o.store}</span>
-                {o.notes && <span className="block truncate text-xs text-slate-500 dark:text-slate-400" title={o.notes}>{o.notes}</span>}
+                {o.notes && <span className="block truncate text-xs text-slate-600 dark:text-slate-400" title={o.notes}>{o.notes}</span>}
               </span>
               {isLowest && <span className="rounded-xl bg-emerald-600 px-1.5 py-0.5 text-xs font-bold uppercase text-white">Lowest</span>}
-              <span className={`w-20 text-right text-sm font-bold tabular-nums ${isLowest ? "text-emerald-800 dark:text-emerald-200" : "text-slate-900 dark:text-white"}`}>
+              <span className={`w-20 text-right text-sm font-bold tabular-nums ${isLowest ? "text-emerald-900 dark:text-emerald-200" : "text-slate-900 dark:text-white"}`}>
                 {money(o.price)}
               </span>
               {o.link ? (
@@ -55,7 +55,7 @@ export default function PriceMatchCard({ group: g, starred, onToggleStar, onComp
         <strong>{g.lowest.store}</strong> instead of {g.highest.store}.
       </p>
 
-      <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">Snapshot from the sheet. Prices change often; confirm at the store.</p>
+      <p className="mt-3 text-xs text-slate-600 dark:text-slate-400">Snapshot from the sheet. Prices change often; confirm at the store.</p>
 
       <div className="mt-auto flex flex-wrap gap-2 pt-3">
         <button type="button" onClick={() => onToggleStar(g.lowest)} aria-pressed={starred}
