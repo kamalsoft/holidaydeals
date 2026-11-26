@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import DealCard from "@/components/DealCard";
-import FilterSidebar from "@/components/FilterSidebar";
 import type { ViewProps } from "./types";
 import Toolbar from "./Toolbar";
+import FilterPanel from "./FilterPanel";
 import Results from "./Results";
 
 const BUCKETS = [
@@ -63,11 +63,9 @@ export default function DashboardView(p: ViewProps) {
       </section>
 
       <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
-        <aside aria-label="Filters" className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-auto">
-          <FilterSidebar filters={p.filters} onChange={p.patch} onClear={p.clearFilters} facets={p.facets} priceMax={p.priceMax} />
-        </aside>
+        <FilterPanel p={p} />
         <div className="min-w-0 space-y-4">
-          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} />
+          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center" />
           <p className="text-sm text-slate-600 dark:text-slate-300">
             Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
           </p>

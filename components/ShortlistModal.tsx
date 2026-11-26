@@ -1,8 +1,11 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useDialogFocus } from "@/components/useDialogFocus";
 import { cartTotals, savingsOf, toCsv, toMarkdown, type CartItem } from "@/lib/cart";
 import { downloadFile } from "@/lib/storage";
+import { copyText } from "@/lib/clipboard";
 
 interface Props {
   open: boolean;
@@ -10,18 +13,26 @@ interface Props {
   onRemove: (id: string) => void;
   onClear: () => void;
   onClose: () => void;
+  shareUrl: () => string;
 }
 
-export default function ShortlistModal({ open, items, onRemove, onClear, onClose }: Props) {
+export default function ShortlistModal({ open, items, onRemove, onClear, onClose, shareUrl }: Props) {
+  const [copied, setCopied] = useState(false);
+  const copyShare = async () => {
+    setCopied(await copyText(shareUrl()));
+    setTimeout(() => setCopied(false), 1500);
+  };
   const { spend, savings } = cartTotals(items);
   const stamp = () => new Date().toISOString().slice(0, 10);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, open, onClose);
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm"
           onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <motion.div role="dialog" aria-modal="true" aria-label="My Wishlist"
+          <motion.div ref={dialogRef} role="dialog" aria-modal="true" aria-label="My Wishlist"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.97, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }}
             className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
@@ -57,6 +68,10 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
                 className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-40">Export CSV</button>
               <button type="button" disabled={!items.length} onClick={() => downloadFile(`holiday-wishlist-${stamp()}.md`, toMarkdown(items), "text/markdown")}
                 className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:opacity-40 dark:bg-slate-100 dark:text-slate-900">Export Markdown</button>
+              <button type="button" disabled={!items.length} onClick={copyShare}
+                className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-100 disabled:opacity-40 dark:border-slate-700 dark:hover:bg-slate-800">
+                {copied ? "Link copied ✓" : "Copy share link"}
+              </button>
               <button type="button" disabled={!items.length} onClick={onClear}
                 className="ml-auto text-sm text-rose-600 hover:underline disabled:opacity-40">Clear wishlist</button>
             </footer>

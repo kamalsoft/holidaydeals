@@ -38,4 +38,6 @@ export interface ViewProps {
   priceGroups: PriceGroup[];
   view: ResultsView;
   setView: (v: ResultsView) => void;
+  filtersOpen: boolean;
+  setFiltersOpen: (open: boolean) => void;
 }

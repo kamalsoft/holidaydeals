@@ -1,10 +1,10 @@
 "use client";
 
-import FilterSidebar from "@/components/FilterSidebar";
 import DealRow from "@/components/DealRow";
 import type { Filters } from "@/lib/filters";
 import type { ViewProps } from "./types";
 import Toolbar from "./Toolbar";
+import FilterPanel from "./FilterPanel";
 import Results from "./Results";
 
 /** Quick feed tabs: each one is a sort order. */
@@ -26,9 +26,7 @@ export default function FeedView(p: ViewProps) {
 
   return (
     <div className="grid gap-6 lg:h-[calc(100dvh-8rem)] lg:grid-cols-[16rem_1fr_18rem]">
-      <aside aria-label="Filters" className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900 lg:overflow-hidden">
-        <FilterSidebar filters={p.filters} onChange={p.patch} onClear={p.clearFilters} facets={p.facets} priceMax={p.priceMax} />
-      </aside>
+      <FilterPanel p={p} />
 
       <div className="flex min-h-0 min-w-0 flex-col gap-3">
         {/* Fixed top: category bar, tabs, toolbar */}
@@ -58,7 +56,7 @@ export default function FeedView(p: ViewProps) {
         </div>
 
         <div className="shrink-0">
-          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} />
+          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center" />
         </div>
 
         <p aria-live="polite" className="shrink-0 text-sm text-slate-600 dark:text-slate-300">

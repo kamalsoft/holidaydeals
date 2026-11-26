@@ -1,10 +1,10 @@
 "use client";
 
 import DealCard from "@/components/DealCard";
-import FilterSidebar from "@/components/FilterSidebar";
 import Highlights, { StatStrip } from "@/components/Highlights";
 import type { ViewProps } from "./types";
 import Toolbar from "./Toolbar";
+import FilterPanel from "./FilterPanel";
 import Results from "./Results";
 
 /** Default layout: highlight tiles on top, filters on the left, cards below. */
@@ -20,15 +20,7 @@ export default function ClassicView(p: ViewProps) {
       )}
 
       <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
-        <aside aria-label="Filters" className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-auto">
-          <FilterSidebar
-            filters={p.filters}
-            onChange={p.patch}
-            onClear={p.clearFilters}
-            facets={p.facets}
-            priceMax={p.priceMax}
-          />
-        </aside>
+        <FilterPanel p={p} />
 
         <div className="min-w-0 space-y-4">
           <Toolbar
@@ -39,7 +31,7 @@ export default function ClassicView(p: ViewProps) {
             hiddenCount={p.hiddenCount}
             restoreHidden={p.restoreHidden}
             view={p.view}
-            setView={p.setView} clearFilters={p.clearFilters}
+            setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center"
           />
 
           <section aria-live="polite" className="space-y-3">

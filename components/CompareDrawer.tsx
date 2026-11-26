@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useDialogFocus } from "@/components/useDialogFocus";
 import type { DealItem } from "@/lib/normalizeDeals";
 import type { Similar } from "@/lib/compare";
 
@@ -12,6 +14,8 @@ interface Props {
 
 export default function CompareDrawer({ target, similar, onClose }: Props) {
   const reduce = useReducedMotion();
+  const asideRef = useRef<HTMLElement>(null);
+  useDialogFocus(asideRef, target !== null, onClose);
   const priced = [target, ...similar.map((s) => s.item)].filter((d): d is DealItem => !!d && d.price !== null);
   const lowest = priced.reduce<DealItem | null>((b, d) => (b === null || (d.price ?? 0) < (b.price ?? 0) ? d : b), null);
 
@@ -20,7 +24,7 @@ export default function CompareDrawer({ target, similar, onClose }: Props) {
       {target && (
         <motion.div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-sm" onClick={onClose}
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <motion.aside role="dialog" aria-modal="true" aria-label="Compare prices"
+          <motion.aside ref={asideRef} role="dialog" aria-modal="true" aria-label="Compare prices"
             onClick={(e) => e.stopPropagation()}
             initial={{ x: reduce ? 0 : "100%" }} animate={{ x: 0 }} exit={{ x: reduce ? 0 : "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 32 }}

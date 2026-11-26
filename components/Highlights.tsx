@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useDialogFocus } from "@/components/useDialogFocus";
 import { AnimatePresence, animate, motion, useReducedMotion } from "framer-motion";
 import type { DealItem } from "@/lib/normalizeDeals";
 import type { Highlights as H } from "@/lib/highlights";
@@ -94,12 +95,8 @@ function HotDealsCard({ items, onShowAll }: { items: DealItem[]; onShowAll: () =
 function HotDealsModal({
   open, items, asOf, onClose, onOpen,
 }: { open: boolean; items: DealItem[]; asOf: string; onClose: () => void; onOpen: (d: DealItem) => void }) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, open, onClose);
 
   return (
     <AnimatePresence>
@@ -110,6 +107,7 @@ function HotDealsModal({
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         >
           <motion.div
+            ref={dialogRef}
             role="dialog" aria-modal="true" aria-labelledby="hot-deals-title"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}

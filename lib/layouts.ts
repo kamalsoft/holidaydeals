@@ -6,10 +6,21 @@ export const LAYOUTS = [
   { id: "feed", name: "Feed" },
   { id: "spotlight", name: "Spotlight" },
   { id: "dashboard", name: "Dashboard" },
+  { id: "simple", name: "Simple" },
+  { id: "superior", name: "Superior" },
+  { id: "rich", name: "Rich" },
+  { id: "luxury", name: "Luxury" },
 ] as const;
 
 export type LayoutId = (typeof LAYOUTS)[number]["id"];
-export const DEFAULT_LAYOUT: LayoutId = "classic";
+/** Default layout when the link has no ?layout=. Web: the original design. Phones: the lightest list. */
+export const WEB_DEFAULT: LayoutId = "classic";
+export const MOBILE_DEFAULT: LayoutId = "simple";
+export const DEFAULT_LAYOUT: LayoutId = WEB_DEFAULT;
+
+export function defaultLayoutFor(isMobile: boolean): LayoutId {
+  return isMobile ? MOBILE_DEFAULT : WEB_DEFAULT;
+}
 
 export function parseLayout(value: string | null): LayoutId {
   return LAYOUTS.some((l) => l.id === value) ? (value as LayoutId) : DEFAULT_LAYOUT;

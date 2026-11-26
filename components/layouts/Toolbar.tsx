@@ -19,12 +19,14 @@ interface Props {
   view: ResultsView;
   setView: (v: ResultsView) => void;
   clearFilters: () => void;
+  /** Display classes for this placement (desktop row or phone drawer). */
+  layout?: string;
 }
 
 /** Expired toggle, quick chips, sort and restore-hidden. Shared by every layout. */
-export default function Toolbar({ filters, patch, toggleChip, expiredCount, hiddenCount, restoreHidden, view, setView, clearFilters }: Props) {
+export default function Toolbar({ filters, patch, toggleChip, expiredCount, hiddenCount, restoreHidden, view, setView, clearFilters, layout = "flex flex-wrap items-center" }: Props) {
   return (
-    <section className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-white/70 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
+    <section className={`${layout} gap-2 rounded-2xl border border-slate-200 bg-white/70 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70`}>
       <button
         type="button"
         role="switch"
