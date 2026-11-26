@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+// Cards fade in; scan the settled colours, not a half-faded frame.
+test.use({ reducedMotion: "reduce" });
+
 const LAYOUTS = ["classic", "feed", "spotlight", "dashboard", "simple", "superior", "rich", "luxury"];
 
 // Colour contrast must pass WCAG 2 AA in every layout, in both themes.
