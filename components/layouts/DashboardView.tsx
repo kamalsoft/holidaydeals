@@ -38,6 +38,7 @@ export default function DashboardView(p: ViewProps) {
 
   return (
     <div className="space-y-6">
+      {p.hasData ? (
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
         <Kpi label="Active deals" value={active.length.toLocaleString()} accent="from-indigo-600 to-violet-600" />
         <Kpi label="At 50%+ off" value={p.highlights.deep50.count.toLocaleString()} accent="from-fuchsia-600 to-rose-600" />
@@ -45,6 +46,9 @@ export default function DashboardView(p: ViewProps) {
         <Kpi label="Ending soon" value={ending.toLocaleString()} hint="within 7 days" accent="from-amber-500 to-orange-600" />
         <Kpi label="In your wishlist" value={p.cartIds.size.toLocaleString()} hint="saved in this browser" accent="from-emerald-600 to-teal-600" />
       </div>
+) : (
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">{Array.from({ length: 5 }).map((_, i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}</div>
+      )}
 
       <section aria-label="Discount spread" className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-sm font-bold text-slate-900 dark:text-white">How deep are the discounts?</h2>
@@ -66,9 +70,9 @@ export default function DashboardView(p: ViewProps) {
         <FilterPanel p={p} />
         <div className="min-w-0 space-y-4">
           <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center" />
-          <p className="text-sm text-slate-600 dark:text-slate-300">
+          {p.hasData && (<p className="text-sm text-slate-600 dark:text-slate-300">
             Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
-          </p>
+          </p>)}
           <Results
             p={p}
             skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}</div>}

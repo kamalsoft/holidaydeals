@@ -35,7 +35,9 @@ export default function SpotlightView(p: ViewProps) {
         <section aria-label="Spotlight deal" className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-500 via-amber-500 to-emerald-500 p-6 text-white shadow-xl sm:p-8">
           <div aria-hidden className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/15 blur-2xl" />
           <p className="text-xs font-bold uppercase tracking-widest text-white/90">✨ Spotlight pick</p>
-          {hero ? (
+          {!p.hasData ? (
+            <div aria-hidden className="mt-5 h-40 animate-pulse rounded-2xl bg-white/20" />
+          ) : hero ? (
             <>
               <h2 className="mt-3 line-clamp-3 text-2xl font-extrabold leading-tight sm:text-3xl">{hero.title}</h2>
               <p className="mt-2 text-sm text-white/90">{[hero.brand, hero.store].filter(Boolean).join(" · ")}</p>
@@ -60,21 +62,27 @@ export default function SpotlightView(p: ViewProps) {
           )}
         </section>
 
-        <div className="grid grid-cols-2 gap-3">
-          <MiniTile label="Biggest % off" deal={p.highlights.biggestOff} onOpen={p.openCompare} />
-          <MiniTile label="Under $50" deal={p.highlights.under50} onOpen={p.openCompare} />
-          <MiniTile label="TV / laptop" deal={p.highlights.bigTicket} onOpen={p.openCompare} />
-          <MiniTile label="Ending soon" deal={p.highlights.expiringSoon} onOpen={p.openCompare} />
-        </div>
+        {p.hasData ? (
+          <div className="grid grid-cols-2 gap-3">
+            <MiniTile label="Biggest % off" deal={p.highlights.biggestOff} onOpen={p.openCompare} />
+            <MiniTile label="Under $50" deal={p.highlights.under50} onOpen={p.openCompare} />
+            <MiniTile label="TV / laptop" deal={p.highlights.bigTicket} onOpen={p.openCompare} />
+            <MiniTile label="Ending soon" deal={p.highlights.expiringSoon} onOpen={p.openCompare} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}
+          </div>
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
         <FilterPanel p={p} />
         <div className="min-w-0 space-y-4">
           <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center" />
-          <p className="text-sm text-slate-600 dark:text-slate-300">
+          {p.hasData && (<p className="text-sm text-slate-600 dark:text-slate-300">
             Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
-          </p>
+          </p>)}
           <Results
             p={p}
             skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}</div>}

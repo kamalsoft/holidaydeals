@@ -17,12 +17,12 @@ export default function SimpleView(p: ViewProps) {
           hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView}
           clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center"
         />
-        <p className="text-sm text-slate-600 dark:text-slate-300">
+        {p.hasData && (<p className="text-sm text-slate-600 dark:text-slate-300">
           Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
-        </p>
+        </p>)}
         <Results
           p={p}
-          skeleton={<div className="space-y-2">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-16 animate-pulse rounded-xl bg-slate-200/70 dark:bg-slate-800" />)}</div>}
+          skeleton={<div className="space-y-2">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-16 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}</div>}
           renderCards={(items) => (
             <ul className="divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-700 dark:bg-slate-900">
               {items.map((d) => (

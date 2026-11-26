@@ -63,7 +63,9 @@ test("reset filters clears the search", async ({ page }) => {
   await expect(page.getByText(/Showing/).first()).toBeVisible({ timeout: 60_000 });
   const search = page.getByPlaceholder("Search product, brand, store, notes…");
   await search.fill("zzz-no-such-deal");
-  await page.getByRole("button", { name: "Reset filters" }).click();
+  const empty = page.getByRole("status").filter({ hasText: "No deals match these filters" });
+  await expect(empty).toBeVisible();
+  await empty.getByRole("button", { name: "Reset filters" }).click();
   await expect(search).toHaveValue("");
 });
 

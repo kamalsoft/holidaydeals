@@ -18,7 +18,7 @@ export default function LuxuryView(p: ViewProps) {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300/80">Luxury selection</p>
           <h2 className="mt-1 text-2xl font-semibold text-amber-200 sm:text-3xl">The finest deals of the season</h2>
         </div>
-        <p className="text-sm text-amber-100/70">{p.deals.length.toLocaleString()} curated deals</p>
+        {p.hasData && <p className="text-sm text-amber-100/70">{p.deals.length.toLocaleString()} curated deals</p>}
       </header>
 
       {p.hasData && feature && (
@@ -28,7 +28,7 @@ export default function LuxuryView(p: ViewProps) {
             <h3 className="mt-1 line-clamp-2 text-xl font-semibold text-white">{feature.title}</h3>
             <p className="mt-1 text-sm text-amber-100/70">{[feature.brand, feature.store].filter(Boolean).join(" · ")}</p>
           </div>
-          <div className="flex items-center gap-4 sm:flex-col sm:items-end">
+          <div className="flex flex-wrap items-center gap-4 sm:flex-col sm:items-end">
             <span className="text-3xl font-bold text-amber-200">{money(feature.price)}</span>
             {feature.offPercent !== null && <span className="whitespace-nowrap rounded-full bg-amber-300 px-3 py-1 text-sm font-bold text-slate-900">{feature.offPercent}% off</span>}
             <button type="button" onClick={() => p.openCompare(feature)} className="whitespace-nowrap rounded-xl border border-amber-300/60 px-4 py-2 text-sm font-semibold text-amber-200 hover:bg-amber-300/10">
@@ -46,9 +46,9 @@ export default function LuxuryView(p: ViewProps) {
             hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView}
             clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center"
           />
-          <p className="text-sm text-amber-100/70">
+          {p.hasData && (<p className="text-sm text-amber-100/70">
             Showing <strong className="text-amber-200">{p.results.length}</strong> of {p.deals.length} deals
-          </p>
+          </p>)}
           <Results
             p={p}
             skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-slate-800" />)}</div>}
