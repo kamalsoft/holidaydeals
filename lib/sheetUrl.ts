@@ -1,6 +1,9 @@
 export const DEFAULT_SHEET_ID = "1Kws9jVrDu3LhiTJ_iVgoTSnXr2suh-s58reylOdqvKI";
 export const DEFAULT_TABS = ["Sheet1", "Sheet2", "Sheet3"];
 
+/** Path prefix the site is served under (GitHub Pages in production, root in local dev). */
+export const SITE_BASE = process.env.NODE_ENV === "production" ? "/holidaydeals" : "";
+
 const ID_RE = /^[a-zA-Z0-9-_]{20,}$/;
 
 /** Accepts a full Google Sheets URL or a bare spreadsheet ID. */

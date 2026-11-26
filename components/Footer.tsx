@@ -12,7 +12,7 @@ export default function Footer({ sheetId, asOf }: Props) {
         <a href={sheetUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-indigo-700 hover:underline dark:text-indigo-300">
           Google Sheet ↗
         </a>
-        {asOf && <> · last loaded {asOf} · server cache refreshes every 5 minutes</>}
+        {asOf && <> · data as of {asOf}</>}
       </p>
       <p className="rounded-xl bg-slate-100 p-3 leading-relaxed dark:bg-slate-900">
         <strong className="text-slate-800 dark:text-slate-200">Disclaimer:</strong> Holiday Deal Finder is an independent tool. It does not sell

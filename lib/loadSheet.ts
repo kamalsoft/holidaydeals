@@ -5,7 +5,7 @@ import {
   type SheetsResponse,
   type TabResult,
 } from "./normalizeDeals";
-import { isValidSpreadsheetId } from "./sheetUrl";
+import { DEFAULT_SHEET_ID, DEFAULT_TABS, SITE_BASE, isValidSpreadsheetId } from "./sheetUrl";
 
 const NOT_PUBLIC =
   'Sheet is private, invalid, or this tab does not exist. Set sharing to "Anyone with the link can view" and check the tab name.';
@@ -35,6 +35,27 @@ async function loadTab(spreadsheetId: string, name: string, now: Date): Promise<
     if (err instanceof TypeError) return fail(name, NOT_PUBLIC);
     return fail(name, err instanceof Error ? err.message : "Unknown error");
   }
+}
+
+/**
+ * Uses the hourly snapshot built into the site when it matches the default sheet and tabs.
+ * Otherwise (or if the snapshot is missing) it reads the live sheet.
+ */
+export async function loadPublishedOrLive(spreadsheetId: string, names: string[]): Promise<SheetsResponse> {
+  const sameSource =
+    spreadsheetId === DEFAULT_SHEET_ID && names.join(",") === DEFAULT_TABS.join(",");
+  if (sameSource) {
+    try {
+      const res = await fetch(`${SITE_BASE}/data/snapshot.json`);
+      if (res.ok) {
+        const snap = (await res.json()) as SheetsResponse;
+        if (!snap.error && snap.deals?.length) return snap;
+      }
+    } catch {
+      // No snapshot available: fall through to the live sheet.
+    }
+  }
+  return loadSheet(spreadsheetId, names);
 }
 
 export async function loadSheet(spreadsheetId: string, names: string[]): Promise<SheetsResponse> {

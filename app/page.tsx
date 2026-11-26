@@ -11,7 +11,7 @@ import SpotlightView from "@/components/layouts/SpotlightView";
 import DashboardView from "@/components/layouts/DashboardView";
 import type { ViewProps } from "@/components/layouts/types";
 import { type DealItem, type SheetsResponse, dealKey } from "@/lib/normalizeDeals";
-import { loadSheet } from "@/lib/loadSheet";
+import { loadPublishedOrLive } from "@/lib/loadSheet";
 import { buildHighlights } from "@/lib/highlights";
 import { type Chip, DEFAULT_FILTERS, DISCOUNT_BANDS, type Filters, applyFilters, facet, sortDeals } from "@/lib/filters";
 import { findSimilar } from "@/lib/compare";
@@ -81,7 +81,7 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     setError(null);
-    loadSheet(sheetId, tabNames)
+    loadPublishedOrLive(sheetId, tabNames)
       .then((json) => {
         if (cancelled) return;
         setData(json);
