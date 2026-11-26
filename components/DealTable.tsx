@@ -15,7 +15,7 @@ interface Props {
 /** Table view of deals. Sorting comes from the Sort menu in the toolbar. */
 export default function DealTable({ deals, starredIds, onToggleStar, onCompare, onHide }: Props) {
   const head = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400";
-  const action = "rounded-md px-1.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800";
+  const action = "rounded-xl px-1.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800";
   return (
     <div className="min-h-0 flex-1 overflow-auto rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
       <table className="w-full min-w-[720px] text-sm">
@@ -49,7 +49,7 @@ export default function DealTable({ deals, starredIds, onToggleStar, onCompare, 
                 <button type="button" onClick={() => onCompare(d)} className={action}>Compare</button>
                 <button type="button" onClick={() => onHide(d)} className={action}>Hide</button>
                 {d.link ? (
-                  <a href={d.link} target="_blank" rel="noopener noreferrer" className="ml-1 rounded-md bg-indigo-600 px-2 py-1 text-xs font-semibold text-white hover:bg-indigo-500">View ↗</a>
+                  <a href={d.link} target="_blank" rel="noopener noreferrer" className="ml-1 rounded-xl bg-indigo-600 px-2 py-1 text-xs font-semibold text-white hover:bg-indigo-500">View ↗</a>
                 ) : null}
               </td>
             </tr>

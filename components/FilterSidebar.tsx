@@ -18,7 +18,7 @@ function CheckList({
       <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{title}</legend>
       <div className="max-h-44 space-y-1 overflow-auto pr-1">
         {values.map(([v, n]) => (
-          <label key={v} className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <label key={v} className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
             <span className="flex items-center gap-2 truncate">
               <input type="checkbox" className="accent-indigo-600" checked={selected.includes(v)} onChange={() => onToggle(v)} />
               <span className="truncate text-slate-700 dark:text-slate-200">{v}</span>
@@ -73,7 +73,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
       <fieldset className="space-y-1.5">
         <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Discount depth</legend>
         {DISCOUNT_BANDS.map((b) => (
-          <label key={b.id} className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <label key={b.id} className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
             <span className="flex items-center gap-2">
               <input type="checkbox" className="accent-indigo-600" checked={f.bands.includes(b.id)}
                 onChange={() => onChange({ bands: f.bands.includes(b.id) ? f.bands.filter((x) => x !== b.id) : [...f.bands, b.id] })} />
@@ -82,7 +82,7 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
             <span className="text-xs text-slate-400">{facets.bandCounts[b.id] ?? 0}</span>
           </label>
         ))}
-        <label className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+        <label className="flex cursor-pointer items-center justify-between gap-2 rounded-xl px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
           <span className="flex items-center gap-2">
             <input type="checkbox" className="accent-indigo-600" checked={f.endingOnly} onChange={() => onChange({ endingOnly: !f.endingOnly })} />
             <span className="text-slate-700 dark:text-slate-200">Ending within 7 days</span>

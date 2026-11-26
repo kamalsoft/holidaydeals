@@ -38,7 +38,7 @@ export default function DashboardView(p: ViewProps) {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         <Kpi label="Active deals" value={active.length.toLocaleString()} accent="from-indigo-600 to-violet-600" />
         <Kpi label="At 50%+ off" value={p.highlights.deep50.count.toLocaleString()} accent="from-fuchsia-600 to-rose-600" />
         <Kpi label="Average % off" value={`${avgOff}%`} hint={`${withOff.length} deals with a discount`} accent="from-sky-600 to-cyan-600" />
