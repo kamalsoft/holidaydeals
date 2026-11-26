@@ -38,7 +38,7 @@ export default function FeedView(p: ViewProps) {
           {categories.map(([name, n]) => (
             <button key={name} type="button" aria-pressed={activeCategory === name} onClick={() => toggleCategory(name)}
               className={`shrink-0 rounded-full px-3 py-1.5 text-sm font-semibold ${activeCategory === name ? "bg-indigo-600 text-white" : "bg-white text-slate-700 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700"}`}>
-              {name} <span className="opacity-70">{n}</span>
+              {name} <span className="font-normal">{n}</span>
             </button>
           ))}
         </nav>
