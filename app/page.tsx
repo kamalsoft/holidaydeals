@@ -1,9 +1,7 @@
 "use client";
 
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import DealCard from "@/components/DealCard";
-import DealTable from "@/components/DealTable";
 import FilterSidebar from "@/components/FilterSidebar";
 import CompareDrawer from "@/components/CompareDrawer";
 import ShortlistModal from "@/components/ShortlistModal";
@@ -22,7 +20,6 @@ const KEY_SHEETS = "hdf.sheets";
 const KEY_TABS = "hdf.tabs";
 const KEY_CART = "hdf.cart";
 const KEY_HIDDEN = "hdf.hidden";
-const PAGE_SIZE = 48;
 const MAX_SAVED_SHEETS = 8;
 
 const CHIPS: { id: Chip; label: string }[] = [
@@ -54,15 +51,12 @@ export default function Home() {
   const [reloadKey, setReloadKey] = useState(0);
 
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
-  const [view, setView] = useState<"grid" | "table">("grid");
-  const [visible, setVisible] = useState(PAGE_SIZE);
   const [compareDeal, setCompareDeal] = useState<DealItem | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
   const [sourceInput, setSourceInput] = useState("");
   const [sourceError, setSourceError] = useState<string | null>(null);
-  const [tabInput, setTabInput] = useState("");
 
   // Restore per-browser preferences after mount (avoids server/client mismatch).
   /* eslint-disable react-hooks/set-state-in-effect -- reading localStorage must wait for mount to avoid hydration mismatch */
@@ -100,7 +94,6 @@ export default function Home() {
       .then((json) => {
         setData(json);
         setLoading(false);
-        setVisible(PAGE_SIZE);
       })
       .catch((e: unknown) => {
         if (e instanceof DOMException && e.name === "AbortError") return;
@@ -170,20 +163,6 @@ export default function Home() {
     if (id === sheetId) setSheetId(DEFAULT_SHEET_ID);
   }
 
-  function addTab(e: FormEvent) {
-    e.preventDefault();
-    const name = tabInput.trim();
-    if (!name || tabNames.includes(name)) return setTabInput("");
-    setTabNames([...tabNames, name]);
-    setTabInput("");
-  }
-
-  function removeTab(name: string) {
-    setTabNames(tabNames.filter((t) => t !== name));
-    if (filters.tab === name) patch({ tab: "ALL" });
-  }
-
-  const tabStatus = (name: string) => data?.tabs.find((t) => t.name === name);
   const asOf = data ? new Date(data.fetchedAt).toLocaleString() : "—";
 
   return (
@@ -228,33 +207,6 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => patch({ tab: "ALL" })}
-              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${filters.tab === "ALL" ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "bg-white text-slate-700 ring-1 ring-slate-200 hover:ring-slate-400 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700"}`}
-            >
-              All tabs unified
-            </button>
-            {tabNames.map((t) => {
-              const st = tabStatus(t);
-              const active = filters.tab === t;
-              return (
-                <span key={t} className={`inline-flex items-center gap-1 rounded-full px-1 py-1 ring-1 ${active ? "bg-indigo-600 text-white ring-indigo-600" : "bg-white text-slate-700 ring-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700"}`}>
-                  <button type="button" onClick={() => patch({ tab: t })} className="px-3 text-sm font-semibold">
-                    {t}{st ? <span className="ml-1.5 text-xs opacity-80">{st.error ? "⚠" : st.count}</span> : null}
-                  </button>
-                  <button type="button" onClick={() => removeTab(t)} aria-label={`Remove tab ${t}`} className="pr-2 text-xs opacity-60 hover:opacity-100">×</button>
-                </span>
-              );
-            })}
-            <form onSubmit={addTab} className="inline-flex gap-1">
-              <label htmlFor="tab-input" className="sr-only">Add tab name</label>
-              <input id="tab-input" value={tabInput} onChange={(e) => setTabInput(e.target.value)} placeholder="+ tab name"
-                className="w-28 rounded-full border border-dashed border-slate-400 bg-transparent px-3 py-1 text-sm outline-none focus:border-indigo-500" />
-            </form>
-          </div>
-
           {data?.tabs.some((t) => t.error) && (
             <ul className="space-y-1 text-xs text-rose-700 dark:text-rose-300">
               {data.tabs.filter((t) => t.error).map((t) => <li key={t.name}>⚠ {t.name}: {t.error}</li>)}
@@ -284,7 +236,7 @@ export default function Home() {
               <span className="sr-only">Search deals</span>
               <input
                 value={filters.query}
-                onChange={(e) => { patch({ query: e.target.value }); setVisible(PAGE_SIZE); }}
+                onChange={(e) => patch({ query: e.target.value })}
                 placeholder="Search product, brand, store, notes…"
                 className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none ring-indigo-500/40 focus:ring-4 dark:border-slate-700 dark:bg-slate-950"
               />
@@ -316,12 +268,6 @@ export default function Home() {
               className="rounded-xl border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
               {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
-            <div className="flex overflow-hidden rounded-xl border border-slate-300 text-sm dark:border-slate-700" role="group" aria-label="View">
-              {(["grid", "table"] as const).map((v) => (
-                <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)}
-                  className={`px-3 py-2 capitalize ${view === v ? "bg-indigo-600 text-white" : "hover:bg-slate-100 dark:hover:bg-slate-800"}`}>{v}</button>
-              ))}
-            </div>
             {hiddenCount > 0 && (
               <button type="button" onClick={() => setHidden([])} className="rounded-xl border border-dashed border-slate-400 px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
                 Restore {hiddenCount} hidden
@@ -364,37 +310,13 @@ export default function Home() {
               </div>
             )}
 
-            {data && results.length > 0 && view === "grid" && (
-              <AnimatePresence initial={false}>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {results.slice(0, visible).map((d, i) => (
-                    <DealCard key={d.id} deal={d} index={i} starred={cartIds.has(d.id)} onToggleStar={toggleStar} onCompare={setCompareDeal} onHide={hideDeal} />
-                  ))}
-                </div>
-              </AnimatePresence>
-            )}
-
-            {data && results.length > 0 && view === "table" && (
-              <DealTable
-                deals={results.slice(0, visible)}
-                sort={filters.sort}
-                onSort={(s) => patch({ sort: s })}
-                starredIds={cartIds}
-                onToggleStar={toggleStar}
-                onCompare={setCompareDeal}
-                onHide={hideDeal}
-              />
-            )}
-
-            {results.length > visible && (
-              <div className="mt-6 text-center">
-                <button type="button" onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                  className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900">
-                  Show more ({results.length - visible} left)
-                </button>
+            {data && results.length > 0 && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {results.map((d, i) => (
+                  <DealCard key={d.id} deal={d} index={i} starred={cartIds.has(d.id)} onToggleStar={toggleStar} onCompare={setCompareDeal} onHide={hideDeal} />
+                ))}
               </div>
             )}
-
           </section>
         </div>
 
