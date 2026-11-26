@@ -18,7 +18,7 @@ export default function LuxuryView(p: ViewProps) {
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-300/80">Luxury selection</p>
           <h2 className="mt-1 text-2xl font-extrabold text-amber-200 sm:text-3xl">The finest deals of the season</h2>
         </div>
-        <p className="text-sm text-amber-100/70">{p.deals.length.toLocaleString()} curated deals</p>
+        {p.hasData && <p className="text-sm text-amber-100/70">{p.deals.length.toLocaleString()} curated deals</p>}
       </header>
 
       {p.hasData && feature && (
@@ -46,9 +46,9 @@ export default function LuxuryView(p: ViewProps) {
             hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView}
             clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center"
           />
-          <p className="text-sm text-amber-100/70">
+          {p.hasData && (<p className="text-sm text-amber-100/70">
             Showing <strong className="text-amber-200">{p.results.length}</strong> of {p.deals.length} deals
-          </p>
+          </p>)}
           <Results
             p={p}
             skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-slate-800" />)}</div>}

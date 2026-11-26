@@ -59,9 +59,9 @@ export default function FeedView(p: ViewProps) {
           <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} layout="hidden lg:flex flex-wrap items-center" />
         </div>
 
-        <p aria-live="polite" className="shrink-0 text-sm text-slate-600 dark:text-slate-300">
+        {p.hasData && (<p aria-live="polite" className="shrink-0 text-sm text-slate-600 dark:text-slate-300">
           Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
-        </p>
+        </p>)}
 
         {/* Scrolling results */}
         <Results
@@ -95,7 +95,7 @@ export default function FeedView(p: ViewProps) {
             </li>
           ))}
         </ol>
-        {p.highlights.hotDeals.length === 0 && <p className="text-xs text-slate-500">No discounted deals in this view.</p>}
+        {p.hasData && p.highlights.hotDeals.length === 0 && <p className="text-xs text-slate-500">No discounted deals in this view.</p>}
         <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">From the sheet · as of {p.asOf}</p>
       </aside>
     </div>

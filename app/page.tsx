@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactElement, useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import CompareDrawer from "@/components/CompareDrawer";
 import ShortlistModal from "@/components/ShortlistModal";
 import Footer from "@/components/Footer";
@@ -57,6 +58,8 @@ export default function Home() {
   const [data, setData] = useState<SheetsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const [compareDeal, setCompareDeal] = useState<DealItem | null>(null);
@@ -117,7 +120,7 @@ export default function Home() {
     return () => {
       cancelled = true;
     };
-  }, [ready, sheetId, tabNames]);
+  }, [ready, sheetId, tabNames, attempt]);
 
   // Per-device hides: hidden deals are removed everywhere (cards, highlights, facets, compare).
   const hiddenSet = useMemo(() => new Set(hidden), [hidden]);
@@ -321,11 +324,23 @@ export default function Home() {
 
         {error && (
           <div role="alert" className="rounded-2xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-800 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200">
-            {error}
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="min-w-0 flex-1">{error}</p>
+              <button type="button" onClick={() => setAttempt((n) => n + 1)} className="rounded-lg border border-rose-600 px-3 py-1.5 font-semibold hover:bg-rose-100 dark:hover:bg-rose-500/20">
+                Try again
+              </button>
+            </div>
           </div>
         )}
 
-        <Current {...vm} />
+        <motion.div
+          key={layout}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Current {...vm} />
+        </motion.div>
 
         <Footer sheetId={sheetId} asOf={data ? asOf : null} />
       </div>
