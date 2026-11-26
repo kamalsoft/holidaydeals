@@ -139,7 +139,7 @@ export default function Home() {
     setHidden((prev) => (prev.includes(dealKey(d)) ? prev : [...prev, dealKey(d)]));
   const toggleStar = (d: DealItem) =>
     setCart((prev) => (prev.some((i) => i.id === d.id) ? prev.filter((i) => i.id !== d.id) : [...prev, toCartItem(d)]));
-  const clearFilters = () => setFilters({ ...DEFAULT_FILTERS, tab: filters.tab, hideExpired: filters.hideExpired });
+  const clearFilters = () => setFilters(DEFAULT_FILTERS);
 
   const asOf = data ? new Date(data.fetchedAt).toLocaleString() : "—";
 

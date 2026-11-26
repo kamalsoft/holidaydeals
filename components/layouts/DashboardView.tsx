@@ -67,7 +67,7 @@ export default function DashboardView(p: ViewProps) {
           <FilterSidebar filters={p.filters} onChange={p.patch} onClear={p.clearFilters} facets={p.facets} priceMax={p.priceMax} />
         </aside>
         <div className="min-w-0 space-y-4">
-          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} />
+          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} />
           <p className="text-sm text-slate-600 dark:text-slate-300">
             Showing <strong className="text-slate-900 dark:text-white">{p.results.length}</strong> of {p.deals.length} deals
           </p>

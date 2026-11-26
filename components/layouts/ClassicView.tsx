@@ -39,7 +39,7 @@ export default function ClassicView(p: ViewProps) {
             hiddenCount={p.hiddenCount}
             restoreHidden={p.restoreHidden}
             view={p.view}
-            setView={p.setView}
+            setView={p.setView} clearFilters={p.clearFilters}
           />
 
           <section aria-live="polite" className="space-y-3">

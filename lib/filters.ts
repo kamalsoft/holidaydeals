@@ -101,3 +101,24 @@ export function facet(items: DealItem[], key: "store" | "category" | "subCategor
   }
   return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
+
+/** True when any filter, search, chip or sort differs from the defaults. */
+export function isFiltered(f: Filters): boolean {
+  const d = DEFAULT_FILTERS;
+  return (
+    f.query.trim() !== "" ||
+    f.tab !== d.tab ||
+    f.stores.length > 0 ||
+    f.categories.length > 0 ||
+    f.subCategories.length > 0 ||
+    f.brands.length > 0 ||
+    f.minPrice !== d.minPrice ||
+    f.maxPrice !== d.maxPrice ||
+    f.minOff !== d.minOff ||
+    f.bands.length > 0 ||
+    f.endingOnly !== d.endingOnly ||
+    f.hideExpired !== d.hideExpired ||
+    f.chips.length > 0 ||
+    f.sort !== d.sort
+  );
+}

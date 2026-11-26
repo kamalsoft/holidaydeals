@@ -58,7 +58,7 @@ export default function FeedView(p: ViewProps) {
         </div>
 
         <div className="shrink-0">
-          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} />
+          <Toolbar filters={p.filters} patch={p.patch} toggleChip={p.toggleChip} expiredCount={p.expiredCount} hiddenCount={p.hiddenCount} restoreHidden={p.restoreHidden} view={p.view} setView={p.setView} clearFilters={p.clearFilters} />
         </div>
 
         <p aria-live="polite" className="shrink-0 text-sm text-slate-600 dark:text-slate-300">
