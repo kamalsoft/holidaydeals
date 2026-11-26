@@ -1,12 +1,12 @@
 "use client";
 
-import type { Filters } from "@/lib/filters";
+import { DISCOUNT_BANDS, type Filters } from "@/lib/filters";
 
 interface Props {
   filters: Filters;
   onChange: (patch: Partial<Filters>) => void;
   onClear: () => void;
-  facets: { stores: [string, number][]; categories: [string, number][]; subCategories: [string, number][]; brands: [string, number][] };
+  facets: { stores: [string, number][]; categories: [string, number][]; subCategories: [string, number][]; brands: [string, number][]; bandCounts: Record<string, number>; endingCount: number };
   priceMax: number;
 }
 
@@ -69,6 +69,27 @@ export default function FilterSidebar({ filters: f, onChange, onClear, facets, p
         <input id="min-off" type="range" min={0} max={90} step={5} value={f.minOff}
           onChange={(e) => onChange({ minOff: Number(e.target.value) })} className="w-full accent-emerald-600" />
       </div>
+
+      <fieldset className="space-y-1.5">
+        <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Discount depth</legend>
+        {DISCOUNT_BANDS.map((b) => (
+          <label key={b.id} className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+            <span className="flex items-center gap-2">
+              <input type="checkbox" className="accent-indigo-600" checked={f.bands.includes(b.id)}
+                onChange={() => onChange({ bands: f.bands.includes(b.id) ? f.bands.filter((x) => x !== b.id) : [...f.bands, b.id] })} />
+              <span className="text-slate-700 dark:text-slate-200">{b.label}</span>
+            </span>
+            <span className="text-xs text-slate-400">{facets.bandCounts[b.id] ?? 0}</span>
+          </label>
+        ))}
+        <label className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-1.5 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span className="flex items-center gap-2">
+            <input type="checkbox" className="accent-indigo-600" checked={f.endingOnly} onChange={() => onChange({ endingOnly: !f.endingOnly })} />
+            <span className="text-slate-700 dark:text-slate-200">Ending within 7 days</span>
+          </span>
+          <span className="text-xs text-slate-400">{facets.endingCount}</span>
+        </label>
+      </fieldset>
 
       <CheckList title="Store" values={facets.stores} selected={f.stores} onToggle={toggle("stores")} />
       <CheckList title="Category" values={facets.categories} selected={f.categories} onToggle={toggle("categories")} />

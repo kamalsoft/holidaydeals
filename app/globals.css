@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark styles follow the <html class="dark"> set by the theme switch (System / Light / Dark). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -18,4 +21,12 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Native controls (selects, scrollbars, date pickers) follow the theme. */
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
 }

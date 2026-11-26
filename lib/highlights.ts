@@ -37,6 +37,6 @@ export function buildHighlights(items: DealItem[]): Highlights {
     bigTicket: best(bigTicketPool, (d) => d.score ?? -1),
     hotDeals: [...withOff]
       .sort((a, b) => (b.offPercent ?? 0) - (a.offPercent ?? 0) || (b.score ?? 0) - (a.score ?? 0))
-      .slice(0, 5),
+      .slice(0, 10),
   };
 }

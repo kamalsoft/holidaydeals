@@ -9,7 +9,7 @@ export interface Similar {
 // Upgrade to a proper fuzzy matcher if matches look wrong.
 const STOP = new Set(["the", "and", "with", "for", "inch", "class", "series", "smart", "new", "black", "white", "pack"]);
 
-const tokensOf = (d: DealItem) =>
+export const tokensOf = (d: DealItem) =>
   new Set(
     `${d.brand} ${d.title}`
       .toLowerCase()
