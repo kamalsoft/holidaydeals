@@ -179,6 +179,7 @@ export default function Home() {
             <span className="bg-gradient-to-r from-rose-500 via-amber-500 to-emerald-500 bg-clip-text text-transparent">Holiday Deal Finder</span>
             <span aria-hidden> ✨</span>
           </h1>
+          <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">Thanksgiving Day Deals 2026</span>
           <label className="relative order-last min-w-0 flex-1 basis-full sm:order-none sm:basis-auto">
             <span className="sr-only">Search deals</span>
             <input
