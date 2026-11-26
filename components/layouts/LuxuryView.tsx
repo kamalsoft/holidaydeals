@@ -28,7 +28,7 @@ export default function LuxuryView(p: ViewProps) {
             <h3 className="mt-1 line-clamp-2 text-xl font-semibold text-white">{feature.title}</h3>
             <p className="mt-1 text-sm text-amber-100/70">{[feature.brand, feature.store].filter(Boolean).join(" · ")}</p>
           </div>
-          <div className="flex items-center gap-4 sm:flex-col sm:items-end">
+          <div className="flex flex-wrap items-center gap-3 sm:flex-col sm:items-end">
             <span className="text-3xl font-bold text-amber-200">{money(feature.price)}</span>
             {feature.offPercent !== null && <span className="whitespace-nowrap rounded-full bg-amber-300 px-3 py-1 text-sm font-bold text-slate-900">{feature.offPercent}% off</span>}
             <button type="button" onClick={() => p.openCompare(feature)} className="whitespace-nowrap rounded-xl border border-amber-300/60 px-4 py-2 text-sm font-semibold text-amber-200 hover:bg-amber-300/10">
