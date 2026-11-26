@@ -49,7 +49,7 @@ export default function Toolbar({ filters, patch, toggleChip, expiredCount, hidd
         );
       })}
       <select aria-label="Sort deals" value={filters.sort} onChange={(e) => patch({ sort: e.target.value as Filters["sort"] })}
-        className="rounded-xl border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
+        className="rounded-xl border border-slate-300 bg-white px-2 py-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100">
         {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
       </select>
       <div role="group" aria-label="Results view" className="ml-auto flex overflow-hidden rounded-xl border border-slate-300 text-sm dark:border-slate-700">
