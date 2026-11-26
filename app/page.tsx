@@ -8,6 +8,7 @@ import ShortlistModal from "@/components/ShortlistModal";
 import Footer from "@/components/Footer";
 import Highlights, { StatStrip } from "@/components/Highlights";
 import { type DealItem, type SheetsResponse, dealKey } from "@/lib/normalizeDeals";
+import { loadSheet } from "@/lib/loadSheet";
 import { buildHighlights } from "@/lib/highlights";
 import { type Chip, DEFAULT_FILTERS, type Filters, applyFilters, facet, sortDeals } from "@/lib/filters";
 import { findSimilar } from "@/lib/compare";
@@ -76,31 +77,28 @@ export default function Home() {
   useEffect(() => { if (ready) saveJson(KEY_TABS, tabNames); }, [ready, tabNames]);
   useEffect(() => { if (ready) saveJson(KEY_CART, cart); }, [ready, cart]);
 
-  // Fetch the sheet (server caches each tab's CSV for 5 minutes).
+  // Fetch the sheet in the browser (the static site has no server).
   useEffect(() => {
     if (!ready) return;
-    const ctrl = new AbortController();
+    let cancelled = false;
     // Reset the loading flag when a new request starts (sheet, tabs, or refresh changed).
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     setError(null);
-    const qs = new URLSearchParams({ id: sheetId, tabs: tabNames.join(",") });
-    fetch(`/api/sheets?${qs.toString()}`, { signal: ctrl.signal })
-      .then(async (r) => {
-        const json = (await r.json()) as SheetsResponse;
-        if (!r.ok) throw new Error(json.error ?? "Request failed");
-        return json;
-      })
+    loadSheet(sheetId, tabNames)
       .then((json) => {
+        if (cancelled) return;
         setData(json);
         setLoading(false);
       })
       .catch((e: unknown) => {
-        if (e instanceof DOMException && e.name === "AbortError") return;
+        if (cancelled) return;
         setError(e instanceof Error ? e.message : "Could not load the sheet.");
         setLoading(false);
       });
-    return () => ctrl.abort();
+    return () => {
+      cancelled = true;
+    };
   }, [ready, sheetId, tabNames, reloadKey]);
 
   // Per-device hides: hidden deals are removed everywhere (cards, highlights, facets, compare).
