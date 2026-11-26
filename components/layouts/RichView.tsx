@@ -14,7 +14,7 @@ export default function RichView(p: ViewProps) {
   const active = p.filters.categories[0] ?? null;
   const pick = (c: string) => p.patch({ categories: active === c ? [] : [c] });
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {p.hasData && <Highlights h={p.highlights} asOf={p.asOf} onOpen={p.openCompare} />}
 
       <nav aria-label="Categories" className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">

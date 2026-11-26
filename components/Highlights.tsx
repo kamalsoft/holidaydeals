@@ -33,7 +33,7 @@ function Card({
       whileHover={{ y: -2 }}
       className={`flex min-h-[6.5rem] flex-col overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br p-3 text-left shadow-sm transition disabled:opacity-60 dark:border-white/5 ${accent}`}
     >
-      <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+      <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
         <span aria-hidden>{icon}</span> {label}
       </div>
       {deal ? (
@@ -43,7 +43,7 @@ function Card({
             {deal.price !== null && <span className="text-base font-bold text-slate-900 dark:text-white">${deal.price.toFixed(2)}</span>}
             {deal.offPercent !== null && <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">{deal.offPercent}% off</span>}
           </div>
-          {hint && <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">{hint}</p>}
+          {hint && <p className="truncate text-xs text-slate-500 dark:text-slate-400">{hint}</p>}
         </>
       ) : (
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">No match in this view.</p>
@@ -71,7 +71,7 @@ function HotDealsCard({ items, onShowAll }: { items: DealItem[]; onShowAll: () =
   const top = items[0] ?? null;
   return (
     <div className="flex min-h-[6.5rem] flex-col rounded-2xl border border-rose-200 bg-gradient-to-br from-rose-50 to-amber-50 p-3 dark:border-rose-500/20 dark:from-rose-500/10 dark:to-amber-500/10">
-      <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-rose-800 dark:text-rose-200">
+      <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-rose-800 dark:text-rose-200">
         <span aria-hidden>🔥</span> Hot deals
       </div>
       {top ? (
@@ -79,7 +79,7 @@ function HotDealsCard({ items, onShowAll }: { items: DealItem[]; onShowAll: () =
           <p className="mt-1 line-clamp-2 text-xs font-semibold leading-snug text-slate-900 dark:text-white">{top.title}</p>
           <div className="mt-auto flex items-center justify-between gap-2 pt-1">
             <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">{top.offPercent}% off</span>
-            <button type="button" onClick={onShowAll} className="rounded-lg bg-rose-600 px-2.5 py-1 text-[11px] font-semibold text-white transition hover:bg-rose-500">
+            <button type="button" onClick={onShowAll} className="rounded-xl bg-rose-600 px-2.5 py-1 text-xs font-semibold text-white transition hover:bg-rose-500">
               View top {items.length}
             </button>
           </div>
@@ -115,10 +115,10 @@ function HotDealsModal({
           >
             <header className="flex items-start justify-between gap-3 border-b border-slate-200 p-4 dark:border-slate-800">
               <div>
-                <h2 id="hot-deals-title" className="text-base font-bold text-slate-900 dark:text-white">🔥 Hot deals</h2>
+                <h2 id="hot-deals-title" className="text-lg font-bold text-slate-900 dark:text-white">🔥 Hot deals</h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">Biggest discounts from the sheet · as of {asOf}</p>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close hot deals" className="rounded-lg px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close hot deals" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
             <ol className="flex-1 divide-y divide-slate-100 overflow-auto dark:divide-slate-800">
               {items.map((d, i) => (
@@ -150,7 +150,7 @@ export default function Highlights({ h, asOf, onOpen }: { h: H; asOf: string; on
   const [hotOpen, setHotOpen] = useState(false);
   const closeHot = () => setHotOpen(false);
   return (
-    <section aria-label="Top picks" className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7">
+    <section aria-label="Top picks" className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-7">
       <Card icon="🏷️" label="Biggest % off" deal={h.biggestOff} accent="from-emerald-100 to-white dark:from-emerald-500/15 dark:to-slate-900" onOpen={onOpen} />
       <Card icon="💲" label="Under $50" deal={h.under50} accent="from-sky-100 to-white dark:from-sky-500/15 dark:to-slate-900" onOpen={onOpen} />
       <Card icon="⭐" label="Best value" deal={h.bestValue} hint={h.bestValue?.score != null ? `Score ${h.bestValue.score}/100` : undefined} accent="from-violet-100 to-white dark:from-violet-500/15 dark:to-slate-900" onOpen={onOpen} />

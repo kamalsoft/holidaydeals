@@ -13,7 +13,7 @@ function MiniTile({ label, deal, onOpen }: { label: string; deal: DealItem | nul
   return (
     <button type="button" disabled={!deal} onClick={() => deal && onOpen(deal)}
       className="flex flex-col rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:-translate-y-0.5 hover:shadow-md disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900">
-      <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</span>
       <span className="mt-1 line-clamp-2 text-xs font-semibold text-slate-900 dark:text-slate-100">{deal?.title ?? "No match"}</span>
       {deal && (
         <span className="mt-auto pt-2 text-sm font-bold text-slate-900 dark:text-white">
@@ -32,9 +32,9 @@ export default function SpotlightView(p: ViewProps) {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <section aria-label="Spotlight deal" className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-500 via-amber-500 to-emerald-500 p-6 text-white shadow-xl sm:p-8">
+        <section aria-label="Spotlight deal" className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-500 via-amber-500 to-emerald-500 p-6 text-white shadow-xl">
           <div aria-hidden className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/15 blur-2xl" />
-          <p className="text-xs font-bold uppercase tracking-widest text-white/90">✨ Spotlight pick</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-white/90">✨ Spotlight pick</p>
           {hero ? (
             <>
               <h2 className="mt-3 line-clamp-3 text-2xl font-extrabold leading-tight sm:text-3xl">{hero.title}</h2>
@@ -42,8 +42,8 @@ export default function SpotlightView(p: ViewProps) {
               <div className="mt-5 flex flex-wrap items-end gap-4">
                 <span className="text-4xl font-black">{money(hero.price)}</span>
                 {hero.wasPrice !== null && <span className="pb-1 text-sm line-through text-white/80">{money(hero.wasPrice)}</span>}
-                {hero.offPercent !== null && <span className="rounded-lg bg-white/20 px-3 py-1 text-sm font-bold backdrop-blur">{hero.offPercent}% off</span>}
-                {hero.score !== null && <span className="rounded-lg bg-white/20 px-3 py-1 text-sm font-bold backdrop-blur">Score {hero.score}</span>}
+                {hero.offPercent !== null && <span className="rounded-xl bg-white/20 px-3 py-1 text-sm font-bold backdrop-blur">{hero.offPercent}% off</span>}
+                {hero.score !== null && <span className="rounded-xl bg-white/20 px-3 py-1 text-sm font-bold backdrop-blur">Score {hero.score}</span>}
               </div>
               {hero.notes && <p className="mt-4 text-xs text-white/85">{hero.notes}</p>}
               <div className="mt-6 flex flex-wrap gap-2">
@@ -60,7 +60,7 @@ export default function SpotlightView(p: ViewProps) {
           )}
         </section>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <MiniTile label="Biggest % off" deal={p.highlights.biggestOff} onOpen={p.openCompare} />
           <MiniTile label="Under $50" deal={p.highlights.under50} onOpen={p.openCompare} />
           <MiniTile label="TV / laptop" deal={p.highlights.bigTicket} onOpen={p.openCompare} />

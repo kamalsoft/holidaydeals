@@ -28,7 +28,7 @@ export default function FilterPanel({ p }: { p: ViewProps }) {
       >
         <div className="mb-4 flex items-center justify-between lg:hidden">
           <h2 className="text-sm font-bold text-slate-900 dark:text-white">Filters &amp; options</h2>
-          <button type="button" onClick={() => p.setFiltersOpen(false)} aria-label="Close filters" className="rounded-lg px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+          <button type="button" onClick={() => p.setFiltersOpen(false)} aria-label="Close filters" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
         </div>
         <Toolbar
           layout="lg:hidden flex flex-col items-stretch"

@@ -249,7 +249,7 @@ export default function Home() {
               <select
                 value={layout}
                 onChange={(e) => changeLayout(e.target.value as LayoutId)}
-                className="rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                className="rounded-xl border border-slate-300 bg-white px-2 py-1.5 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               >
                 {LAYOUTS.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
               </select>
@@ -277,7 +277,7 @@ export default function Home() {
           <select
             value={layout}
             onChange={(e) => changeLayout(e.target.value as LayoutId)}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm normal-case text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+            className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-2 py-2 text-sm normal-case text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
           >
             {LAYOUTS.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
           </select>
@@ -301,13 +301,13 @@ export default function Home() {
             <p className="min-w-0 flex-1">
               A friend shared a wishlist: {sharedFound.length} of {shared.length} deals are in the current sheet.
             </p>
-            <button type="button" onClick={() => setShowOnlyShared((v) => !v)} className="rounded-lg border border-amber-600 px-3 py-1.5 font-semibold hover:bg-amber-100 dark:hover:bg-amber-500/20">
+            <button type="button" onClick={() => setShowOnlyShared((v) => !v)} className="rounded-xl border border-amber-600 px-3 py-1.5 font-semibold hover:bg-amber-100 dark:hover:bg-amber-500/20">
               {showOnlyShared ? "Show all deals" : "Show only shared deals"}
             </button>
-            <button type="button" disabled={sharedFound.length === 0} onClick={addSharedToWishlist} className="rounded-lg bg-amber-500 px-3 py-1.5 font-semibold text-slate-900 hover:bg-amber-400 disabled:opacity-40">
+            <button type="button" disabled={sharedFound.length === 0} onClick={addSharedToWishlist} className="rounded-xl bg-amber-500 px-3 py-1.5 font-semibold text-slate-900 hover:bg-amber-400 disabled:opacity-40">
               Add to my wishlist
             </button>
-            <button type="button" onClick={() => { setShared(null); setShowOnlyShared(false); }} className="rounded-lg px-3 py-1.5 font-semibold hover:bg-amber-100 dark:hover:bg-amber-500/20">
+            <button type="button" onClick={() => { setShared(null); setShowOnlyShared(false); }} className="rounded-xl px-3 py-1.5 font-semibold hover:bg-amber-100 dark:hover:bg-amber-500/20">
               Dismiss
             </button>
           </div>

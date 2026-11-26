@@ -31,11 +31,11 @@ export default function CompareDrawer({ target, similar, onClose }: Props) {
             className="flex h-full w-full max-w-md flex-col overflow-hidden bg-white shadow-2xl dark:bg-slate-900">
             <header className="flex items-start justify-between gap-3 border-b border-slate-200 p-4 dark:border-slate-800">
               <div>
-                <h2 className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Compare prices</h2>
+                <h2 className="text-lg font-bold text-indigo-700 dark:text-indigo-300">Compare prices</h2>
                 <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{target.title}</p>
                 <p className="text-xs text-slate-500">{target.store} · ${target.price?.toFixed(2) ?? "—"}</p>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close" className="rounded-lg px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
 
             <div className="flex-1 space-y-2 overflow-auto p-4">

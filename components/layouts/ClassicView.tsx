@@ -12,7 +12,7 @@ export default function ClassicView(p: ViewProps) {
   return (
     <>
       {p.loading && !p.hasData ? (
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-7">
           {Array.from({ length: 7 }).map((_, i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-slate-200/70 dark:bg-slate-800" />)}
         </div>
       ) : (

@@ -12,11 +12,11 @@ const money = (n: number | null) => (n === null ? "—" : `$${n.toFixed(2)}`);
 export default function LuxuryView(p: ViewProps) {
   const feature = p.highlights.bestValue ?? p.highlights.hotDeals[0] ?? null;
   return (
-    <div className="space-y-6 rounded-3xl border border-amber-300/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-4 text-amber-50 shadow-2xl sm:p-6">
+    <div className="space-y-6 rounded-2xl border border-amber-300/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-4 text-amber-50 shadow-2xl sm:p-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-300/80">Luxury selection</p>
-          <h2 className="mt-1 text-2xl font-semibold text-amber-200 sm:text-3xl">The finest deals of the season</h2>
+          <p className="text-xs font-semibold uppercase tracking-wide text-amber-300/80">Luxury selection</p>
+          <h2 className="mt-1 text-2xl font-extrabold text-amber-200 sm:text-3xl">The finest deals of the season</h2>
         </div>
         <p className="text-sm text-amber-100/70">{p.deals.length.toLocaleString()} curated deals</p>
       </header>
@@ -24,7 +24,7 @@ export default function LuxuryView(p: ViewProps) {
       {p.hasData && feature && (
         <section aria-label="Featured deal" className="grid gap-4 rounded-2xl border border-amber-300/30 bg-slate-900/60 p-5 sm:grid-cols-[1fr_auto] sm:items-center">
           <div className="min-w-0">
-            <p className="text-xs uppercase tracking-widest text-amber-300/80">Featured</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-amber-300/80">Featured</p>
             <h3 className="mt-1 line-clamp-2 text-xl font-semibold text-white">{feature.title}</h3>
             <p className="mt-1 text-sm text-amber-100/70">{[feature.brand, feature.store].filter(Boolean).join(" · ")}</p>
           </div>
@@ -53,7 +53,7 @@ export default function LuxuryView(p: ViewProps) {
             p={p}
             skeleton={<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-slate-800" />)}</div>}
             renderCards={(items) => (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {items.map((d, i) => (
                   <DealCard key={d.id} deal={d} index={i} starred={p.cartIds.has(d.id)} onToggleStar={p.toggleStar} onCompare={p.openCompare} onHide={p.hideDeal} />
                 ))}

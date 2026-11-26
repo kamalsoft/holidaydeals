@@ -84,11 +84,11 @@ export default function FeedView(p: ViewProps) {
         <ol className="space-y-1">
           {p.highlights.hotDeals.map((d, i) => (
             <li key={d.id}>
-              <button type="button" onClick={() => p.openCompare(d)} className="flex w-full items-start gap-2 rounded-lg p-2 text-left hover:bg-white dark:hover:bg-white/5">
+              <button type="button" onClick={() => p.openCompare(d)} className="flex w-full items-start gap-2 rounded-xl p-2 text-left hover:bg-white dark:hover:bg-white/5">
                 <span className="w-5 shrink-0 text-xs font-bold text-rose-700 dark:text-rose-300">{i + 1}</span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-2 block text-xs font-semibold text-slate-900 dark:text-slate-100">{d.title}</span>
-                  <span className="text-[11px] text-slate-500 dark:text-slate-400">{d.store}{d.price !== null ? ` · $${d.price.toFixed(2)}` : ""}</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">{d.store}{d.price !== null ? ` · $${d.price.toFixed(2)}` : ""}</span>
                 </span>
                 <span className="shrink-0 text-xs font-bold text-emerald-700 dark:text-emerald-300">{d.offPercent}%</span>
               </button>
@@ -96,7 +96,7 @@ export default function FeedView(p: ViewProps) {
           ))}
         </ol>
         {p.highlights.hotDeals.length === 0 && <p className="text-xs text-slate-500">No discounted deals in this view.</p>}
-        <p className="mt-3 text-[11px] text-slate-500 dark:text-slate-400">From the sheet · as of {p.asOf}</p>
+        <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">From the sheet · as of {p.asOf}</p>
       </aside>
     </div>
   );

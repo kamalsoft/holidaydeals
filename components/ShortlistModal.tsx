@@ -38,10 +38,10 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
             className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
             <header className="flex items-center justify-between border-b border-slate-200 p-4 dark:border-slate-800">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">🎁 My Wishlist</h2>
-              <button type="button" onClick={onClose} aria-label="Close" className="rounded-lg px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
+              <button type="button" onClick={onClose} aria-label="Close" className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">✕</button>
             </header>
 
-            <div className="grid grid-cols-3 gap-3 p-4">
+            <div className="grid grid-cols-3 gap-4 p-4">
               <Stat label="Items" value={String(items.length)} />
               <Stat label="Total spend" value={`$${spend.toFixed(2)}`} />
               <Stat label="Est. savings" value={`$${savings.toFixed(2)}`} accent />
@@ -65,11 +65,11 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
 
             <footer className="flex flex-wrap items-center gap-2 border-t border-slate-200 p-4 dark:border-slate-800">
               <button type="button" disabled={!items.length} onClick={() => downloadFile(`holiday-wishlist-${stamp()}.csv`, toCsv(items), "text/csv")}
-                className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-40">Export CSV</button>
+                className="rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-40">Export CSV</button>
               <button type="button" disabled={!items.length} onClick={() => downloadFile(`holiday-wishlist-${stamp()}.md`, toMarkdown(items), "text/markdown")}
-                className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:opacity-40 dark:bg-slate-100 dark:text-slate-900">Export Markdown</button>
+                className="rounded-xl bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:opacity-40 dark:bg-slate-100 dark:text-slate-900">Export Markdown</button>
               <button type="button" disabled={!items.length} onClick={copyShare}
-                className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-100 disabled:opacity-40 dark:border-slate-700 dark:hover:bg-slate-800">
+                className="rounded-xl border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-100 disabled:opacity-40 dark:border-slate-700 dark:hover:bg-slate-800">
                 {copied ? "Link copied ✓" : "Copy share link"}
               </button>
               <button type="button" disabled={!items.length} onClick={onClear}
@@ -85,7 +85,7 @@ export default function ShortlistModal({ open, items, onRemove, onClear, onClose
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
-      <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
       <div className={`text-lg font-bold ${accent ? "text-emerald-700 dark:text-emerald-300" : "text-slate-900 dark:text-white"}`}>{value}</div>
     </div>
   );

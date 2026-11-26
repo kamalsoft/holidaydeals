@@ -41,7 +41,7 @@ export default function Preferences() {
     return () => mq.removeEventListener("change", apply);
   }, [ready, theme, accessible]);
 
-  const selectClass = "w-full rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900";
+  const selectClass = "w-full rounded-xl border border-slate-300 bg-white px-2 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900";
 
   return (
     <div className="relative">
